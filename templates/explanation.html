@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Explanation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
+
+body{
+background: linear-gradient(135deg,#0f2027,#2c5364,#1c1c1c);
+color:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* Title */
+.title{
+font-size:2rem;
+margin-top:20px;
+background:linear-gradient(90deg,#00f2fe,#4facfe);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* Glass */
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:20px;
+border-radius:20px;
+width:90%;
+max-width:900px;
+margin:20px;
+}
+
+/* List */
+ul{line-height:2;}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:#00f2fe;
+cursor:pointer;
+margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 class="title">AI Explanation 🧠</h1>
+
+<div class="glass">
+<p>{{data.explanation}}</p>
+</div>
+
+<div class="glass">
+<h3>Roadmap</h3>
+<ul>
+{% for step in data.roadmap %}
+<li>{{step}}</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="glass">
+<h3>Insights</h3>
+<p>💰 Salary: {{data.insight.salary}}</p>
+<p>📈 Growth: {{data.insight.growth}}</p>
+</div>
+
+<a href="/"><button>← Back</button></a>
+
+</body>
+</html>

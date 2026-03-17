@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Career Navigator</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
+
+body{
+background: linear-gradient(135deg,#0f2027,#2c5364,#1c1c1c);
+color:white;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+/* Title */
+.title{
+font-size:2.5rem;
+font-weight:bold;
+background:linear-gradient(90deg,#00f2fe,#4facfe,#00f2fe);
+background-size:200%;
+-webkit-background-clip:text;
+color:transparent;
+animation:shine 3s infinite linear;
+}
+
+@keyframes shine{
+0%{background-position:0%}
+100%{background-position:200%}
+}
+
+/* Glass Card */
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+text-align:center;
+margin-top:20px;
+}
+
+/* Inputs */
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:none;
+background:rgba(255,255,255,0.2);
+color:white;
+}
+
+input::placeholder{color:#ddd;}
+
+button{
+padding:12px;
+width:100%;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#00f2fe,#4facfe);
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+}
+
+button:hover{transform:scale(1.05);}
+
+</style>
+</head>
+
+<body>
+
+<h1 class="title">AI Career Navigator 🚀</h1>
+
+<form action="/predict" method="POST" class="glass">
+
+<input name="ASVAB_MATH_VERBAL_SCORE" placeholder="Aptitude Score" required>
+<input name="CV_BA_CREDITS" placeholder="Credits" required>
+
+<select name="EDUCATION">
+<option value="high school diploma">High School</option>
+<option value="bachelor's degree">Bachelor</option>
+<option value="master's degree">Master</option>
+</select>
+
+<button>Analyze</button>
+
+</form>
+
+</body>
+</html>

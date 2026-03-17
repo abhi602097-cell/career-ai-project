@@ -1,0 +1,5 @@
+*.pkl
+*.xlsx
+__pycache__/
+.env
+*.log

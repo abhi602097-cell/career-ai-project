@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
+
+body{
+background: linear-gradient(135deg,#0f2027,#2c5364,#1c1c1c);
+color:white;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* Title */
+.title{
+font-size:2rem;
+margin-top:20px;
+background:linear-gradient(90deg,#00f2fe,#4facfe);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* Glass */
+.glass{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:20px;
+border-radius:20px;
+width:90%;
+max-width:900px;
+margin:20px;
+text-align:center;
+}
+
+/* Chart fix */
+.chart-container{
+width:100%;
+max-width:400px;
+margin:20px auto;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:#00f2fe;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 class="title">Prediction Dashboard 📊</h1>
+
+<div class="glass">
+
+<h2>{{data.top_prediction.career}}</h2>
+<p>{{data.top_prediction.probability}}%</p>
+
+<div class="chart-container">
+<canvas id="donutChart"></canvas>
+</div>
+
+<div class="chart-container">
+<canvas id="barChart"></canvas>
+</div>
+
+<br>
+
+<a href="/explanation"><button>View Explanation →</button></a>
+
+</div>
+
+<script>
+
+let data = {{data.predictions | tojson}};
+let labels = data.map(x=>x.career);
+let values = data.map(x=>x.probability);
+
+/* Doughnut Gradient */
+let ctx = document.getElementById("donutChart").getContext("2d");
+let gradient = ctx.createLinearGradient(0,0,300,300);
+gradient.addColorStop(0,"#00f2fe");
+gradient.addColorStop(1,"#4facfe");
+
+new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:labels,
+datasets:[{
+data:values,
+backgroundColor:[gradient,"#6a11cb","#ff6a00"]
+}]
+},
+options:{
+responsive:true,
+plugins:{legend:{labels:{color:"white"}}}
+}
+});
+
+/* Bar Chart */
+new Chart(document.getElementById("barChart"),{
+type:"bar",
+data:{
+labels:labels,
+datasets:[{
+data:values
+}]
+},
+options:{
+responsive:true,
+plugins:{legend:{display:false}}
+}
+});
+
+</script>
+
+</body>
+</html>
